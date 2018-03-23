@@ -3,18 +3,18 @@ site:
   ports :
    - "80:80"
   volumes:
-   - /media/denisvieira/Arquivos/Workspaces/docker/lamp:/var/www/html/
+   - /Users/stant02/Documents/projects/sinsunsisal:/var/www/html/
   links:
    - database
 phpmyadmin:
-   image: corbinu/docker-phpmyadmin
+   image: phpmyadmin/phpmyadmin
    ports :
     - "8080:80"
    environment:
     - MYSQL_USERNAME=root
     - MYSQL_PASSWORD=password
    links:
-    - database:mysql
+    - database:db
 database:
   image: mysql:5.5
   ports:
