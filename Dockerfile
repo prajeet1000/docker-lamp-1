@@ -1,4 +1,5 @@
-FROM lampson0505/ubuntu-phy
+#Base image
+FROM php:7.2-apache
 
-
-CMD service apache2 start && service mysql start && tail -f /dev/null
+#Install musqli
+RUN docker-php-ext-install mysqli
