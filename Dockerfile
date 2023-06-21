@@ -1,7 +1,4 @@
-FROM dockette/devstack
+FROM lampson0505/ubuntu-phy
 
-# Your custom commands
-
-CMD ["/run.sh"]
 
 CMD service apache2 start && service mysql start && tail -f /dev/null
