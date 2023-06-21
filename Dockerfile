@@ -1,24 +1,61 @@
-FROM php:7.0-apache
+FROM ubuntu:16.04
+RUN apt-get update && apt-get upgrade -y
 
-RUN apt-get update \
- && apt-get install -y git zlib1g-dev \
- && docker-php-ext-install pdo pdo_mysql zip \
- && a2enmod rewrite \
- && sed -i 's!/var/www/html!/var/www/public!g' /etc/apache2/sites-available/000-default.conf \
- && mv /var/www/html /var/www/public \
- && curl -sS https://getcomposer.org/installer \
-  | php -- --install-dir=/usr/local/bin --filename=composer
+COPY debconf.selections /tmp/
+RUN debconf-set-selections /tmp/debconf.selections
 
-WORKDIR /var/www/html
+RUN apt-get install -y zip unzip \
+    php7.2 \
+    php7.2-bz2 \
+    php7.2-cgi \
+    php7.2-cli \
+    php7.2-common \
+    php7.2-curl \
+    php7.2-dev \
+    php7.2-enchant \
+     php7.2-fpm \
+    php7.2-gd \
+    php7.2-gmp \
+    php7.2-imap \
+    php7.2-interbase \
+    php7.2-intl \
+    php7.2-json \
+    php7.2-ldap \
+    php7.2-mbstring \
+    php7.2-mysql \
+    php7.2-odbc \
+    php7.2-opcache \
+    php7.2-pgsql \
+    php7.2-phpdbg \
+    php7.2-pspell \
+    php7.2-readline \
+    php7.2-recode \
+    php7.2-snmp \
+    php7.2-sqlite3 \
+    php7.2-sybase \
+    php7.2-tidy \
+    php7.2-xmlrpc \
+    php7.2-xsl \
+    php7.2-zip \
+    apache2 libapache2-mod-php7.2 \
+    mariadb-common mariadb-server mariadb-client \
+     postfix \
+    git nodejs npm composer nano tree vim curl ftp
 
-# Clone the code from GitHub repository
-RUN git clone https://github.com/prajeet1000/docker-lamp-1.git
+RUN npm install -g bower grunt-cli gulp
+RUN a2enmod rewrite
+RUN ln -s /usr/bin/nodejs /usr/bin/node
+RUN chmod +x /usr/sbin/run-lamp.sh
+RUN chown -R www-data:www-data /var/www/html
+
+EXPOSE 80
+EXPOSE 3306
+
+RUN apt update && git clone https://github.com/prajeet1000/docker-lamp-1.git
 
 # Copy the cloned folder to the Apache web root
+RUN rm -rf /var/www/html/*
 RUN cp -r docker-lamp-1/* /var/www/html/
 
-# Expose port 80 for Apache
-EXPOSE 80
-
-# Start Apache when the container starts
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+# Start Apache and MySQL services
+CMD service apache2 start && service mysql start && tail -f /dev/null
