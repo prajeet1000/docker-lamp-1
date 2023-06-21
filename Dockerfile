@@ -1,4 +1,4 @@
-FROM mattrayner/lamp:latest-1804
+FROM dockette/devstack
 
 # Your custom commands
 
