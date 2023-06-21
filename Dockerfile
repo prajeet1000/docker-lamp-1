@@ -1,13 +1,24 @@
-FROM php:5.6-apache
+FROM php:7.0-apache
 
-# Install PDO MySQL driver
-# See https://github.com/docker-library/php/issues/62
-RUN docker-php-ext-install pdo mysql
-RUN docker-php-ext-install pdo mysqli
+RUN apt-get update \
+ && apt-get install -y git zlib1g-dev \
+ && docker-php-ext-install pdo pdo_mysql zip \
+ && a2enmod rewrite \
+ && sed -i 's!/var/www/html!/var/www/public!g' /etc/apache2/sites-available/000-default.conf \
+ && mv /var/www/html /var/www/public \
+ && curl -sS https://getcomposer.org/installer \
+  | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Workaround for write permission on write to MacOS X volumes
-# See https://github.com/boot2docker/boot2docker/pull/534
-RUN usermod -u 1000 www-data
+WORKDIR /var/www/html
 
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
+# Clone the code from GitHub repository
+RUN git clone https://github.com/prajeet1000/docker-lamp-1.git
+
+# Copy the cloned folder to the Apache web root
+RUN cp -r docker-lamp-1/* /var/www/html/
+
+# Expose port 80 for Apache
+EXPOSE 80
+
+# Start Apache when the container starts
+CMD ["apache2ctl", "-D", "FOREGROUND"]
