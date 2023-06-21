@@ -5,3 +5,6 @@ FROM php:7.2-apache
 RUN docker-php-ext-install mysqli
 
 RUN chmod -R 755 /var/www/html && chown -R $user:$user /var/www/html/
+EXPOSE 80
+
+CMD ["apache2ctl", "-D", "FOREGROUND"]
