@@ -1,26 +1,12 @@
-version: '2'
+version: '3'
 services:
-
-  zf:
+  lamp:
     build:
-      context: ./
+      context: .
       dockerfile: Dockerfile
-    volumes:
-      - .:/var/www
     ports:
-      - "8080:80"
-
-  database:
-    image: mysql:5.6
+      - "[HOST WWW PORT NUMBER]:80"
+      - "[HOST DB PORT NUMBER]:3306"
     volumes:
-      - dbdata:/var/lib/mysql
-    environment:
-      - "MYSQL_DATABASE=api"
-      - "MYSQL_USER=developer"
-      - "MYSQL_PASSWORD=developer"
-      - "MYSQL_ROOT_PASSWORD=developer"
-    ports:
-      - "33061:3306"
-
-volumes:
-  dbdata:
+      - "[HOST WWW DOCUMENT ROOT]:/var/www/html"
+      - "[HOST DB DOCUMENT ROOT]:/var/lib/mysql"
