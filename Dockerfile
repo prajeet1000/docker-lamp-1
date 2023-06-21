@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 RUN apt-get update && apt-get upgrade -y
 
-COPY debconf.selections /tmp/
+
 RUN debconf-set-selections /tmp/debconf.selections
 
 RUN apt-get install -y zip unzip \
