@@ -101,7 +101,7 @@ $servername = "database-1.chu2hpbhxioh.ap-northeast-1.rds.amazonaws.com";
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-if(isset['submit']){
+if (isset($_POST['submit'])){
   $sql = "INSERT INTO MyGuests (name, gender, comment)
 VALUES ('John', 'Male','Comment')";
 }
