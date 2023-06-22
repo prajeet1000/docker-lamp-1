@@ -134,7 +134,8 @@ VALUES ('".$name."', '".$gender."','".$website."','".$email."','".$comment."')";
 
 if ($conn->query($sql) === TRUE) {
   ?>
-clearFields()
+  <script>
+clearFields()</script>
   <?php
   echo "New record created successfully";
 } else {
