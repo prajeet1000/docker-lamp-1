@@ -66,7 +66,7 @@ function test_input($data) {
 
 <h2>PHP Form Validation Example</h2>
 <p><span class="error">* required field</span></p>
-<!-- <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
   Name: <input type="text" name="name" value="<?php echo $name;?>">
   <span class="error">* <?php echo $nameErr;?></span>
   <br><br>
@@ -83,7 +83,7 @@ function test_input($data) {
   <input type="radio" name="gender" <?php if (isset($gender) && $gender=="male") echo "checked";?> value="male">Male
   <input type="radio" name="gender" <?php if (isset($gender) && $gender=="other") echo "checked";?> value="other">Other  
   <span class="error">* <?php echo $genderErr;?></span>
-  <br><br> -->
+  <br><br>
   <input type="submit" name="submit" value="Submit">  
 </form>
 
@@ -101,11 +101,10 @@ $servername = "database-1.chu2hpbhxioh.ap-northeast-1.rds.amazonaws.com";
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-
-$sql = "INSERT INTO MyGuests (name, gender, comment)
+if(isset['submit']){
+  $sql = "INSERT INTO MyGuests (name, gender, comment)
 VALUES ('John', 'Male','Comment')";
-
-
+}
 
 if ($conn->query($sql) === TRUE) {
   echo "New record created successfully";
