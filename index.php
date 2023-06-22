@@ -98,7 +98,9 @@ $servername = "database-1.chu2hpbhxioh.ap-northeast-1.rds.amazonaws.com";
 
 
 $name = $_POST["name"];
+$gender = $_POST["gender"];
 $email = $_POST["email"];
+$website = $_POST["website"];
 $comment = $_POST["comment"];
   
   $conn = new mysqli($servername, $username, $password,$dbname);
@@ -107,8 +109,8 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 if (isset($_POST['submit'])){
-  $sql = "INSERT INTO MyGuests (name, gender, comment)
-VALUES ('".$name."', '".$email."','".$comment."')";
+  $sql = "INSERT INTO MyGuests (name, gender,website,email, comment)
+VALUES ('".$name."', '".$gender."','".$website."','".$email."','".$comment."')";
 }
 
 if ($conn->query($sql) === TRUE) {
