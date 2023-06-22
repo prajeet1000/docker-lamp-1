@@ -67,7 +67,7 @@ function test_input($data) {
 <h2>PHP Form Validation Example</h2>
 <p><span class="error">* required field</span></p>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-  <!-- Name: <input type="text" name="name" value="<?php echo $name;?>">
+  Name: <input type="text" name="name" value="<?php echo $name;?>">
   <span class="error">* <?php echo $nameErr;?></span>
   <br><br>
   E-mail: <input type="text" name="email" value="<?php echo $email;?>">
@@ -83,7 +83,7 @@ function test_input($data) {
   <input type="radio" name="gender" <?php if (isset($gender) && $gender=="male") echo "checked";?> value="male">Male
   <input type="radio" name="gender" <?php if (isset($gender) && $gender=="other") echo "checked";?> value="other">Other  
   <span class="error">* <?php echo $genderErr;?></span>
-  <br><br> -->
+  <br><br>
   <input type="submit" name="submit" value="Submit">  
 </form>
 
@@ -95,6 +95,11 @@ $servername = "database-1.chu2hpbhxioh.ap-northeast-1.rds.amazonaws.com";
   $username = "admin";
   $password = "prajeetkumar";
   $dbname = "database1";
+
+
+$name = $_POST["name"];
+$email = $_POST["email"];
+$comment = $_POST["comment"];
   
   $conn = new mysqli($servername, $username, $password,$dbname);
 // Check connection
@@ -103,7 +108,7 @@ if ($conn->connect_error) {
 }
 if (isset($_POST['submit'])){
   $sql = "INSERT INTO MyGuests (name, gender, comment)
-VALUES ('John', 'Male','Comment')";
+VALUES ('".$name."', '".$email."','".$comment."')";
 }
 
 if ($conn->query($sql) === TRUE) {
