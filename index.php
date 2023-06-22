@@ -85,8 +85,26 @@ function test_input($data) {
   <input type="radio" name="gender" <?php if (isset($gender) && $gender=="other") echo "checked";?> value="other">Other  
   <span class="error">* <?php echo $genderErr;?></span>
   <br><br>
-  <input type="submit" name="submit" value="Submit">  
+  <input type="submit" name="submit" onclick="clearFields()" value="Submit">  
 </form>
+
+  <script>
+function clearFields() {
+    // Get all input elements
+    var inputs = document.getElementsByTagName('input');
+    // Clear the value of each input element
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].value = '';
+    }
+    // Get all textarea elements
+    var textareas = document.getElementsByTagName('textarea');
+
+    // Clear the value of each textarea element
+    for (var j = 0; j < textareas.length; j++) {
+        textareas[j].value = '';
+    }
+}
+</script>
 
 
   
