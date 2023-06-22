@@ -1,7 +1,14 @@
-<?php $servername = "database-1.chu2hpbhxioh.ap-northeast-1.rds.amazonaws.com";
+<?php 
+$servername = "database-1.chu2hpbhxioh.ap-northeast-1.rds.amazonaws.com";
   $username = "admin";
   $password = "prajeetkumar";
   $dbname = "database1";
+  
+  $conn = new mysqli($servername, $username, $password,$dbname);
+  
+  
+  
+  
   $sql = "CREATE TABLE MyGuests (
 id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 name VARCHAR(30) NOT NULL,
