@@ -87,6 +87,38 @@ function test_input($data) {
   <input type="submit" name="submit" value="Submit">  
 </form>
 
+
+  
+
+  <?php 
+$servername = "database-1.chu2hpbhxioh.ap-northeast-1.rds.amazonaws.com";
+  $username = "admin";
+  $password = "prajeetkumar";
+  $dbname = "database1";
+  
+  $conn = new mysqli($servername, $username, $password,$dbname);
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "INSERT INTO MyGuests (name, E-mail, Website, comment, gender)
+VALUES ('John', 'Doe', 'john@example.com')";
+
+if ($conn->query($sql) === TRUE) {
+  echo "New record created successfully";
+} else {
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+$conn->close();
+?>
+
+
+
+
+  
+
 <?php
 echo "<h2>Your Input:</h2>";
 echo $name;
