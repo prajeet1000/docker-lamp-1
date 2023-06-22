@@ -85,7 +85,7 @@ function test_input($data) {
   <input type="radio" name="gender" <?php if (isset($gender) && $gender=="other") echo "checked";?> value="other">Other  
   <span class="error">* <?php echo $genderErr;?></span>
   <br><br>
-  <input type="submit" name="submit" onclick="clearFields()" value="Submit">  
+  <input type="submit" name="submit" value="Submit">  
 </form>
 
   <script>
@@ -133,6 +133,9 @@ VALUES ('".$name."', '".$gender."','".$website."','".$email."','".$comment."')";
 }
 
 if ($conn->query($sql) === TRUE) {
+  ?>
+clearFields()
+  <?php
   echo "New record created successfully";
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
