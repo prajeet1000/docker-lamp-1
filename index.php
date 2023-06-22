@@ -103,7 +103,7 @@ if ($conn->connect_error) {
 }
 
 $sql = "INSERT INTO MyGuests (name, gender, comment)
-VALUES ('John', 'Male','testgasdjhf')";
+VALUES ('John', 'Male','Comment')";
 
 
 
@@ -115,10 +115,6 @@ if ($conn->query($sql) === TRUE) {
 
 $conn->close();
 ?>
-
-
-
-
   
 
 <?php
