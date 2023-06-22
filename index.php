@@ -85,7 +85,7 @@ function test_input($data) {
   <input type="radio" name="gender" <?php if (isset($gender) && $gender=="other") echo "checked";?> value="other">Other  
   <span class="error">* <?php echo $genderErr;?></span>
   <br><br>
-  <input type="submit" name="submit" value="Submit">  
+  <input type="submit" name="submit" id="submitButton" value="Submit">  
 </form>
 
   <script>
@@ -103,6 +103,9 @@ function clearFields() {
     for (var j = 0; j < textareas.length; j++) {
         textareas[j].value = '';
     }
+  var submitButton = document.getElementById('submitButton');
+    submitButton.value = 'Submit';
+  
 }
 </script>
 
