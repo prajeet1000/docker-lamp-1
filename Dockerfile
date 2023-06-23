@@ -24,7 +24,7 @@ RUN sed -i '/<VirtualHost \*:443>/a SSLProtocol all -SSLv2 -SSLv3 -TLSv1 -TLSv1.
     && sed -i '/<VirtualHost \*:443>/a SSLProtocol +TLSv1.2 +TLSv1.3' /etc/apache2/sites-available/default-ssl.conf
 
 EXPOSE 80
-RUN service apache2 start
+#RUN service apache2 start
 
 CMD ["apache2ctl", "-D", "FOREGROUND"]
 RUN apache2ctl configtest
