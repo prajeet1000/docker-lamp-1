@@ -26,6 +26,6 @@ RUN sed -i '/<VirtualHost \*:443>/a SSLProtocol all -SSLv2 -SSLv3 -TLSv1 -TLSv1.
 EXPOSE 80
 #RUN service apache2 start
 
-#CMD ["apache2ctl", "-D", "FOREGROUND"]
+CMD ["apache2ctl", "-D", "FOREGROUND"]
 #RUN apache2ctl configtest
 
