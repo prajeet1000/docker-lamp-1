@@ -27,3 +27,5 @@ EXPOSE 80
 RUN service apache2 start
 
 CMD ["apache2ctl", "-D", "FOREGROUND"]
+RUN apache2ctl configtest
+
