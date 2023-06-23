@@ -10,10 +10,10 @@ RUN git clone https://github.com/prajeet1000/docker-lamp-1.git
 RUN chmod -R 755 /var/www/html && chown -R $user:$user /var/www/html/
 RUN cp -r docker-lamp-1/* /var/www/html/
 
-RUN echo "ServerTokens Prod" >> /etc/apache2/apache2.conf \
-    && echo "ServerSignature Off" >> /etc/apache2/apache2.conf \
-    && echo "Header always unset X-Powered-By" >> /etc/apache2/apache2.conf \
-    && echo "Header always append X-Powered-By Prajeet-devops" >> /etc/apache2/apache2.conf
+#RUN echo "ServerTokens Prod" >> /etc/apache2/apache2.conf \
+ #   && echo "ServerSignature Off" >> /etc/apache2/apache2.conf \
+ #   && echo "Header always unset X-Powered-By" >> /etc/apache2/apache2.conf \
+ #   && echo "Header always append X-Powered-By Prajeet-devops" >> /etc/apache2/apache2.conf
 
 #RUN echo "Header always set X-Frame-Options SAMEORIGIN" >> /etc/apache2/apache2.conf \
 #    && echo "Header always set X-Content-Type-Options nosniff" >> /etc/apache2/apache2.conf \
