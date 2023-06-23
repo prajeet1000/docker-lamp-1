@@ -9,11 +9,12 @@ RUN git clone https://github.com/prajeet1000/docker-lamp-1.git
 
 RUN chmod -R 755 /var/www/html && chown -R $user:$user /var/www/html/
 RUN cp -r docker-lamp-1/* /var/www/html/
+RUN a2enmod headers
 
-#RUN echo "ServerTokens Prod" >> /etc/apache2/apache2.conf \
- #   && echo "ServerSignature Off" >> /etc/apache2/apache2.conf \
- #   && echo "Header always unset X-Powered-By" >> /etc/apache2/apache2.conf \
- #   && echo "Header always append X-Powered-By Prajeet-devops" >> /etc/apache2/apache2.conf
+RUN echo "ServerTokens Prod" >> /etc/apache2/apache2.conf \
+    && echo "ServerSignature Off" >> /etc/apache2/apache2.conf \
+    && echo "Header always unset X-Powered-By" >> /etc/apache2/apache2.conf \
+    && echo "Header always append X-Powered-By Prajeet-devops" >> /etc/apache2/apache2.conf
 
 #RUN echo "Header always set X-Frame-Options SAMEORIGIN" >> /etc/apache2/apache2.conf \
 #    && echo "Header always set X-Content-Type-Options nosniff" >> /etc/apache2/apache2.conf \
@@ -26,7 +27,7 @@ RUN cp -r docker-lamp-1/* /var/www/html/
   #  && sed -i '/<VirtualHost \*:443>/a SSLProtocol +TLSv1.2 +TLSv1.3' /etc/apache2/sites-available/default-ssl.conf
 
 EXPOSE 80
-#RUN service apache2 start
+RUN service apache2 start
 
 CMD ["apache2ctl", "-D", "FOREGROUND"]
 RUN apache2ctl configtest
