@@ -37,7 +37,7 @@ RUN cp -r docker-lamp-1/* /var/www/html/
 
 
 EXPOSE 80
-RUN service apache2 start && service php-fpm restart 
+RUN service apache2 start
 
 CMD ["apache2ctl", "-D", "FOREGROUND"]
 RUN apache2ctl configtest
