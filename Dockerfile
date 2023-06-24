@@ -33,7 +33,6 @@ RUN echo "Header unset X-Powered-By" >> /etc/apache2/conf-available/docker-php.c
 
 
     
-# Configure Apache for SonarQube
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
     && echo "export APACHE_RUN_DIR=/var/run/apache2" >> /etc/apache2/envvars \
     && sed -i "s|^\(.*\)DefaultRuntimeDir.*|\1DefaultRuntimeDir \${APACHE_RUN_DIR}|" /etc/apache2/apache2.conf \
@@ -42,6 +41,13 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
     && a2enmod proxy_http \
     && echo "ProxyPass /sonarqube http://localhost:9000/sonarqube" >> /etc/apache2/sites-available/000-default.conf \
     && echo "ProxyPassReverse /sonarqube http://localhost:9000/sonarqube" >> /etc/apache2/sites-available/000-default.conf
+ENV APACHE_RUN_DIR=/var/run/apache2 \
+    APACHE_PID_FILE=/var/run/apache2/apache2.pid \
+    APACHE_RUN_USER=www-data \
+    APACHE_RUN_GROUP=www-data \
+    APACHE_LOG_DIR=/var/log/apache2
+
+
 
 RUN apt update && apt install -y git
 RUN git clone https://github.com/prajeet1000/docker-lamp-1.git
