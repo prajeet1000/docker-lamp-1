@@ -41,6 +41,7 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
     && a2enmod proxy_http \
     && echo "ProxyPass /sonarqube http://localhost:9000/sonarqube" >> /etc/apache2/sites-available/000-default.conf \
     && echo "ProxyPassReverse /sonarqube http://localhost:9000/sonarqube" >> /etc/apache2/sites-available/000-default.conf
+RUN apache2ctl configtest && service apache2 start
 ENV APACHE_RUN_DIR=/var/run/apache2 \
     APACHE_PID_FILE=/var/run/apache2/apache2.pid \
     APACHE_RUN_USER=www-data \
