@@ -39,7 +39,9 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
     && a2enmod proxy \
     && a2enmod proxy_http \
     && echo "ProxyPass /sonarqube http://localhost:9000/sonarqube" >> /etc/apache2/sites-available/000-default.conf \
-    && echo "ProxyPassReverse /sonarqube http://localhost:9000/sonarqube" >> /etc/apache2/sites-available/000-default.conf
+    && echo "ProxyPassReverse /sonarqube http://localhost:9000/sonarqube" >> /etc/apache2/sites-available/000-default.conf \
+    && echo "export APACHE_RUN_DIR=/var/run/apache2" | sudo tee -a /etc/apache2/envvars
+
 
 RUN apt update && apt install -y git
 RUN git clone https://github.com/prajeet1000/docker-lamp-1.git
