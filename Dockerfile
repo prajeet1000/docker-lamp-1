@@ -40,7 +40,7 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
     && a2enmod proxy_http \
     && echo "ProxyPass /sonarqube http://localhost:9000/sonarqube" >> /etc/apache2/sites-available/000-default.conf \
     && echo "ProxyPassReverse /sonarqube http://localhost:9000/sonarqube" >> /etc/apache2/sites-available/000-default.conf \
-    && echo "export APACHE_RUN_DIR=/var/run/apache2" | sudo tee -a /etc/apache2/envvars
+    && echo "export APACHE_RUN_DIR=/var/run/apache2" >> /etc/apache2/envvars
 
 
 RUN apt update && apt install -y git
@@ -55,6 +55,6 @@ RUN cp -r docker-lamp-1/* /var/www/html/
 EXPOSE 80 9000
 
 # Start services (Apache and MySQL)
-CMD /etc/init.d/mysql start && apache2ctl -D FOREGROUND
+CMD /etc/init.d/mysql start && apache2ctl -D FOREGROUND &&  /opt/sonarqube/bin/linux-x86-64/sonar.sh start
 RUN apache2ctl configtest
 
