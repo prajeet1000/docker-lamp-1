@@ -2,10 +2,11 @@
 FROM php:7.2-apache
 
 #Install mysqli
-RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install mysqli && apt-get update 
+
 # Install SonarQube
 RUN curl -OL https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.9.1.44547.zip \
-    && apt install unzip && apt-get update \
+    && apt-get install unzip  \
     && unzip sonarqube-8.9.1.44547.zip \
     && mv sonarqube-8.9.1.44547 /opt/sonarqube
 
