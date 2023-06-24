@@ -1,12 +1,10 @@
 #Base image
 FROM php:7.2-apache
 
-#Install mysqli
-RUN docker-php-ext-install mysqli && apt-get update 
+#Install musqli
+RUN docker-php-ext-install mysqli
 
 
-
-# enable apache header permission and configuration
 RUN a2enmod headers
 RUN echo "ServerTokens Prod" >> /etc/apache2/apache2.conf \
     && echo "ServerSignature Off" >> /etc/apache2/apache2.conf \
@@ -23,13 +21,10 @@ RUN echo "Header always set X-Frame-Options SAMEORIGIN" >> /etc/apache2/apache2.
 RUN sed -i '/<VirtualHost \*:443>/a SSLProtocol all -SSLv2 -SSLv3 -TLSv1 -TLSv1.1' /etc/apache2/sites-available/default-ssl.conf \
     && sed -i '/<VirtualHost \*:443>/a SSLProtocol +TLSv1.2 +TLSv1.3' /etc/apache2/sites-available/default-ssl.conf
 
-
-
-
+    
     # Remove X-Powered-By header
 RUN echo "Header unset X-Powered-By" >> /etc/apache2/conf-available/docker-php.conf \
     && a2enconf docker-php
-
 
 
 RUN apt update && apt install -y git
@@ -42,8 +37,7 @@ RUN cp -r docker-lamp-1/* /var/www/html/
 
 
 EXPOSE 80
+RUN service apache2 start
 
-# Start services (Apache and MySQL)
-CMD /etc/init.d/mysql start && apache2ctl -D FOREGROUND 
+CMD ["apache2ctl", "-D", "FOREGROUND"]
 RUN apache2ctl configtest
-
