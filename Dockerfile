@@ -41,7 +41,7 @@ RUN cp -r docker-lamp-1/* /var/www/html/
 
 
 
-EXPOSE 80 9000
+EXPOSE 80
 
 # Start services (Apache and MySQL)
 CMD /etc/init.d/mysql start && apache2ctl -D FOREGROUND 
