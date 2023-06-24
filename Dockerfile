@@ -4,12 +4,7 @@ FROM php:7.2-apache
 #Install mysqli
 RUN docker-php-ext-install mysqli && apt-get update 
 
-# Install SonarQube
-RUN curl -OL https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.9.1.44547.zip \
-    && apt-get install unzip  \
-    && unzip sonarqube-8.9.1.44547.zip \
-    && mv sonarqube-8.9.1.44547 /opt/sonarqube \
-    && rm sonarqube-8.9.1.44547.zip
+
 
 # enable apache header permission and configuration
 RUN a2enmod headers
@@ -31,18 +26,6 @@ RUN sed -i '/<VirtualHost \*:443>/a SSLProtocol all -SSLv2 -SSLv3 -TLSv1 -TLSv1.
 
 
 
-    
-# Configure Apache for SonarQube
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
-    && echo "export APACHE_RUN_DIR=/var/run/apache2" >> /etc/apache2/envvars \
-    && sed -i "s|^\(.*\)DefaultRuntimeDir.*|\1DefaultRuntimeDir \${APACHE_RUN_DIR}|" /etc/apache2/apache2.conf \
-    && a2enmod rewrite \
-    && a2enmod proxy \
-    && a2enmod proxy_http \
-    && echo "ProxyPass /sonarqube http://localhost:9000/sonarqube" >> /etc/apache2/sites-available/000-default.conf \
-    && echo "ProxyPassReverse /sonarqube http://localhost:9000/sonarqube" >> /etc/apache2/sites-available/000-default.conf
-
-
     # Remove X-Powered-By header
 RUN echo "Header unset X-Powered-By" >> /etc/apache2/conf-available/docker-php.conf \
     && a2enconf docker-php
@@ -61,6 +44,6 @@ RUN cp -r docker-lamp-1/* /var/www/html/
 EXPOSE 80 9000
 
 # Start services (Apache and MySQL)
-CMD /etc/init.d/mysql start && apache2ctl -D FOREGROUND &&  /opt/sonarqube/bin/linux-x86-64/sonar.sh start
+CMD /etc/init.d/mysql start && apache2ctl -D FOREGROUND 
 RUN apache2ctl configtest
 
