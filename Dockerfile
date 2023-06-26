@@ -62,12 +62,13 @@ RUN apt-get update && \
 # Copy project files into the container
 COPY . /usr/share/maven
 WORKDIR /usr/share/maven
-RUN chmod -R 777 /usr/share/maven
+RUN chmod -R 777 /usr/share/maven && chown -R $user:$user /usr/share/maven
 # Build your project with Maven
 RUN mvn clean install
 
 # Specify the command to run when the container starts
 CMD ["java", "-jar", "target/myproject.jar"]
+
 
 EXPOSE 80 9000
 RUN service apache2 start
