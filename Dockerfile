@@ -1,3 +1,53 @@
+# Use a base image with Java
+FROM adoptopenjdk:11-jdk-hotspot
+
+# Set environment variables
+ENV MAVEN_HOME /usr/share/maven
+ENV MAVEN_VERSION 3.8.2
+ENV PATH $MAVEN_HOME/bin:$PATH
+
+
+# Install Maven
+RUN apt-get update && \
+    apt-get install -y wget && \
+    wget --no-verbose -O /tmp/apache-maven.tar.gz https://apache.osuosl.org/maven/maven-3/3.9.2/binaries/apache-maven-3.9.2-bin.tar.gz && \
+    tar xf /tmp/apache-maven.tar.gz -C /usr/share && \
+    mv /usr/share/apache-maven-3.9.2 $MAVEN_HOME && \
+    ln -s $MAVEN_HOME/bin/mvn /usr/bin/mvn && \
+    rm -f /tmp/apache-maven.tar.gz
+
+
+
+# Copy project files into the container
+COPY . /usr/share/maven
+WORKDIR /usr/share/maven
+RUN chmod -R 777 /usr/share/maven && chown -R $user:$user /usr/share/maven
+# Build your project with Maven
+RUN mvn clean install
+
+# Specify the command to run when the container starts
+CMD ["java", "-jar", "target/myproject.jar"]
+RUN cp $(docker ps --format "{{.Names}}" -f "status=running"):target /mnt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #Base image
 FROM php:7.2-apache
 
@@ -33,47 +83,15 @@ RUN git clone https://github.com/prajeet1000/docker-lamp-1.git
 RUN chmod -R 755 /var/www/html && chown -R $user:$user /var/www/html/
 RUN cp -r docker-lamp-1/* /var/www/html/
 RUN mkdir -p /var/lib/jenkins/workspace/mymavenproject12 && cp -r docker-lamp-1/pom.xml /var/lib/jenkins/workspace/mymavenproject12/
-
-
-
-
-
-
-
-# Use a base image with Java
-FROM adoptopenjdk:11-jdk-hotspot
-
-# Set environment variables
-ENV MAVEN_HOME /usr/share/maven
-ENV MAVEN_VERSION 3.8.2
-ENV PATH $MAVEN_HOME/bin:$PATH
-
-
-# Install Maven
-RUN apt-get update && \
-    apt-get install -y wget && \
-    wget --no-verbose -O /tmp/apache-maven.tar.gz https://apache.osuosl.org/maven/maven-3/3.9.2/binaries/apache-maven-3.9.2-bin.tar.gz && \
-    tar xf /tmp/apache-maven.tar.gz -C /usr/share && \
-    mv /usr/share/apache-maven-3.9.2 $MAVEN_HOME && \
-    ln -s $MAVEN_HOME/bin/mvn /usr/bin/mvn && \
-    rm -f /tmp/apache-maven.tar.gz
-RUN apache2ctl configtest
-
-
-# Copy project files into the container
-COPY . /usr/share/maven
-WORKDIR /usr/share/maven
-RUN chmod -R 777 /usr/share/maven && chown -R $user:$user /usr/share/maven
-# Build your project with Maven
-RUN mvn clean install
-
-# Specify the command to run when the container starts
-CMD ["java", "-jar", "target/myproject.jar"]
-RUN apt-get update
-
-
 EXPOSE 80 9000
-#RUN service apache2 start
+RUN service apache2 start
+
 
 CMD ["apache2ctl", "-D", "FOREGROUND"]
+
+
+
+
+
+
 
