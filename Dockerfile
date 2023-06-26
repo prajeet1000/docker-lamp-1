@@ -72,7 +72,7 @@ RUN apt-get update
 
 
 EXPOSE 80 9000
-RUN service apache2 start
+#RUN service apache2 start
 
 CMD ["apache2ctl", "-D", "FOREGROUND"]
 RUN apache2ctl configtest
