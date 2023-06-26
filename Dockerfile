@@ -59,7 +59,7 @@ RUN apt-get update && \
     tar xf /tmp/apache-maven-3.9.2-bin.tar.gz -C /usr/share && \
     mv /usr/share/apache-maven-$MAVEN_VERSION $MAVEN_HOME && \
     ln -s $MAVEN_HOME/bin/mvn /usr/bin/mvn && \
-    rm -f /tmp/apache-maven.tar.gz
+    rm -f /tmp/apache-maven-3.9.2.tar.gz
 
 # Copy project files into the container
 COPY . /usr/src/myproject
