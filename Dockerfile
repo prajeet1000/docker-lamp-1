@@ -37,7 +37,7 @@ RUN mkdir -p /var/lib/jenkins/workspace/mymavenproject12 && cp -r docker-lamp-1/
 
 
 
-EXPOSE 80
+EXPOSE 80 9000
 RUN service apache2 start
 
 CMD ["apache2ctl", "-D", "FOREGROUND"]
