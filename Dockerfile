@@ -34,13 +34,6 @@ RUN cp /usr/share/maven/ ./mnt/maven-code/
 
 
 
-`
-
-
-
-
-
-
 
 
 
