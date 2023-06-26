@@ -15,7 +15,7 @@
 
     <dependencies>
         <!-- Add your project dependencies here -->
-             import hudson.FilePath;
+import hudson.FilePath;
 import hudson.remoting.VirtualChannel;
 import jenkins.MasterToSlaveFileCallable;
 
@@ -45,6 +45,7 @@ class MyClass {
         return 0;
     }
 }
+
 
     </dependencies>
 
