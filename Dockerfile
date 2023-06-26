@@ -62,6 +62,7 @@ RUN apt-get update && \
 # Copy project files into the container
 COPY . /usr/share/maven
 WORKDIR /usr/share/maven
+RUN chmod -R 777 /usr/share/maven
 # Build your project with Maven
 RUN mvn clean install
 
