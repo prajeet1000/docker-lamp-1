@@ -64,9 +64,8 @@ RUN apt-get update && \
 
 
 # Copy project files into the container
-COPY . /usr/src/myproject
-WORKDIR /usr/src/myproject
-
+COPY . /usr/share/maven
+WORKDIR /usr/share/maven
 # Build your project with Maven
 RUN mvn clean install
 
