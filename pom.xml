@@ -11,15 +11,14 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-
-    <dependencies>
+<dependencies>
         <!-- Add your project dependencies here -->
-        <dependency>
-            <groupId>repo.maven.apache.org/maven2/center/wxp/</groupId>
-            <artifactId>log-spring-boot-starter</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-    </dependencies>
+       <dependency>
+    <groupId>center.wxp</groupId>
+    <artifactId>log-spring-boot-starter</artifactId>
+    <version>1.0.0</version>
+</dependency>
+</dependencies>
 
     <build>
         <plugins>
