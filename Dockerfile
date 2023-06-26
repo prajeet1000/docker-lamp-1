@@ -68,6 +68,7 @@ RUN mvn clean install
 
 # Specify the command to run when the container starts
 CMD ["java", "-jar", "target/myproject.jar"]
+RUN apt-get update
 
 
 EXPOSE 80 9000
