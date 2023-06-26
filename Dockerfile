@@ -37,11 +37,7 @@ RUN mkdir -p /var/lib/jenkins/workspace/mymavenproject12 && cp -r docker-lamp-1/
 
 
 
-EXPOSE 80 9000
-RUN service apache2 start
 
-CMD ["apache2ctl", "-D", "FOREGROUND"]
-RUN apache2ctl configtest
 
 
 # Use a base image with Java
@@ -72,3 +68,8 @@ RUN mvn clean install
 # Specify the command to run when the container starts
 CMD ["java", "-jar", "target/myproject.jar"]
 
+EXPOSE 80 9000
+RUN service apache2 start
+
+CMD ["apache2ctl", "-D", "FOREGROUND"]
+RUN apache2ctl configtest
