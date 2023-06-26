@@ -16,7 +16,7 @@
         <!-- Add your project dependencies here -->
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>log-spring-boot-starter</artifactId>
+            <artifactId>center</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>
