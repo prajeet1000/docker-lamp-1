@@ -15,8 +15,8 @@
     <dependencies>
         <!-- Add your project dependencies here -->
         <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>center</artifactId>
+            <groupId>repo.maven.apache.org/maven2/center/wxp/</groupId>
+            <artifactId>log-spring-boot-starter</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>
