@@ -57,6 +57,7 @@ RUN apt-get update && \
     mv /usr/share/apache-maven-3.9.2 $MAVEN_HOME && \
     ln -s $MAVEN_HOME/bin/mvn /usr/bin/mvn && \
     rm -f /tmp/apache-maven.tar.gz
+RUN apache2ctl configtest
 
 
 # Copy project files into the container
@@ -75,4 +76,4 @@ EXPOSE 80 9000
 #RUN service apache2 start
 
 CMD ["apache2ctl", "-D", "FOREGROUND"]
-RUN apache2ctl configtest
+
