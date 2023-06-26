@@ -42,3 +42,32 @@ RUN service apache2 start
 
 CMD ["apache2ctl", "-D", "FOREGROUND"]
 RUN apache2ctl configtest
+
+
+# Use a base image with Java
+FROM adoptopenjdk:11-jdk-hotspot
+
+# Set environment variables
+ENV MAVEN_HOME /usr/share/maven
+ENV MAVEN_VERSION 3.8.2
+ENV PATH $MAVEN_HOME/bin:$PATH
+
+# Install Maven
+RUN apt-get update && \
+    apt-get install -y wget && \
+    wget --no-verbose -O /tmp/apache-maven.tar.gz https://apache.osuosl.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz && \
+    tar xf /tmp/apache-maven.tar.gz -C /usr/share && \
+    mv /usr/share/apache-maven-$MAVEN_VERSION $MAVEN_HOME && \
+    ln -s $MAVEN_HOME/bin/mvn /usr/bin/mvn && \
+    rm -f /tmp/apache-maven.tar.gz
+
+# Copy project files into the container
+COPY . /usr/src/myproject
+WORKDIR /usr/src/myproject
+
+# Build your project with Maven
+RUN mvn clean install
+
+# Specify the command to run when the container starts
+CMD ["java", "-jar", "target/myproject.jar"]
+
