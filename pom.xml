@@ -15,6 +15,11 @@
 
     <dependencies>
         <!-- Add your project dependencies here -->
+              <dependency>
+        <groupId>com.example</groupId>
+        <artifactId>my-library</artifactId>
+        <version>1.0.0</version>
+    </dependency>
 import hudson.FilePath;
 import hudson.remoting.VirtualChannel;
 import jenkins.MasterToSlaveFileCallable;
