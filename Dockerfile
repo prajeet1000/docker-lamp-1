@@ -1,5 +1,6 @@
 # Use a base image with Java
 FROM adoptopenjdk:11-jdk-hotspot
+VOLUME ["/myBuild"]
 
 # Set environment variables
 ENV MAVEN_HOME /usr/share/maven
@@ -27,7 +28,7 @@ RUN mvn clean install
 
 # Specify the command to run when the container starts
 CMD ["java", "-jar", "target/myproject.jar"]
-#RUN cp -rf /usr/share/maven/ ./mnt/maven-code/
+#RUN cp -rf /usr/share/maven/ ./myBuild/
 
 
 
