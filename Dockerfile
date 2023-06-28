@@ -28,7 +28,7 @@ RUN mvn clean install
 
 # Specify the command to run when the container starts
 CMD ["java", "-jar", "target/myproject.jar"]
-#RUN cp -rf /usr/share/maven/ ./myBuild/
+RUN cp -rf /usr/share/maven/ /var/lib/docker/overlay2/11331a4b156af1b4cda3ce6c199b6ba70bf35bca8ae9bf163ce1831fdf552784/diff/myBuild/
 
 
 
