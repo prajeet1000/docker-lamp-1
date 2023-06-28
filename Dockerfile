@@ -15,7 +15,7 @@ RUN mvn clean install
 # Specify the command to run when the container starts
 RUN chmod -R 777 /usr/share/maven/target/*
 WORKDIR /usr/share/maven/target/
-CMD ["java", "-jar", "target/mymavenproject12*"]
+#CMD ["java", "-jar", "target/mymavenproject12*"]
 
 
 
