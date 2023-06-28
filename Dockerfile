@@ -8,12 +8,13 @@ COPY . /usr/share/maven
 WORKDIR /usr/share/maven
 
 RUN chmod -R 777 /usr/share/maven && chown -R $user:$user /usr/share/maven
+EXPOSE 80 9000
 # Build your project with Maven
 RUN mvn clean install
 
 # Specify the command to run when the container starts
 RUN chmod -R 777 /usr/share/maven/target/*
-#CMD ["java", "-jar", "target/mymavenproject12.jar*"]
+CMD ["java", "-jar", "target/mymavenproject12.jar*"]
 
 
 
