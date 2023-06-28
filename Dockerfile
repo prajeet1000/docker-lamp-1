@@ -12,7 +12,7 @@ RUN chmod -R 777 /usr/share/maven && chown -R $user:$user /usr/share/maven
 RUN mvn clean install
 
 # Specify the command to run when the container starts
-CMD ["java", "-jar", "target/myproject.jar"]
+CMD ["java", "-jar", "target/*.jar"]
 
 
 
