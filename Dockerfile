@@ -24,7 +24,7 @@ COPY . /usr/share/maven
 WORKDIR /usr/share/maven
 RUN chmod -R 777 /usr/share/maven && chown -R $user:$user /usr/share/maven
 # Build your project with Maven
-RUN mvn clean install
+RUN mvnw clean install
 
 # Specify the command to run when the container starts
 CMD ["java", "-jar", "target/myproject.jar"]
