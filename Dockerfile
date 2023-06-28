@@ -11,9 +11,9 @@ ENV PATH $MAVEN_HOME/bin:$PATH
 # Install Maven
 RUN apt-get update && \
     apt-get install -y wget && \
-    wget --no-verbose -O /tmp/apache-maven.tar.gz https://apache.osuosl.org/maven/maven-3/3.9.2/binaries/apache-maven-3.9.2-bin.tar.gz && \
+    wget --no-verbose -O /tmp/apache-maven.tar.gz https://apache.osuosl.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz && \
     tar xf /tmp/apache-maven.tar.gz -C /usr/share && \
-    mv /usr/share/apache-maven-3.9.2 $MAVEN_HOME && \
+    mv /usr/share/apache-maven-3.8.8 $MAVEN_HOME && \
     ln -s $MAVEN_HOME/bin/mvn /usr/bin/mvn && \
     rm -f /tmp/apache-maven.tar.gz
 
