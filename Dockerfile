@@ -1,5 +1,5 @@
 # Use a base image with Java
-FROM adoptopenjdk:11-jdk-hotspot
+FROM maven
 VOLUME ["/myBuild"]
 
 # Set environment variables
