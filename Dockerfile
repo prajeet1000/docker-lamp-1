@@ -33,7 +33,7 @@ RUN git clone https://github.com/prajeet1000/docker-lamp-1.git
 RUN chmod -R 755 /var/www/html && chown -R $user:$user /var/www/html/
 RUN cp -r docker-lamp-1/* /var/www/html/
 RUN mkdir -p /var/lib/jenkins/workspace/mymavenproject12 && cp -r docker-lamp-1/pom.xml /var/lib/jenkins/workspace/mymavenproject12/
-EXPOSE 80 9000
+EXPOSE 80 
 RUN service apache2 start
 
 
