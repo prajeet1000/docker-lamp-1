@@ -112,7 +112,7 @@ function clearFields() {
   
 
   <?php 
-$servername = "database-1.cluster-chu2hpbhxioh.ap-northeast-1.rds.amazonaws.com";
+$servername = "database1.chu2hpbhxioh.ap-northeast-1.rds.amazonaws.com";
   $username = "admin";
   $password = "prajeet123";
   $dbname = "database1";
