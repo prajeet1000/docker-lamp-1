@@ -10,7 +10,11 @@ pipeline {
                 // Set up Maven
                 withMaven(maven: 'Maven 3') {
                     // Build the Maven project
-                    sh 'mvn clean install'
+                    sh 'mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=maven-project \
+  -Dsonar.projectName='maven-project' \
+  -Dsonar.host.url=http://43.207.136.9:9000 \
+  -Dsonar.token=sqp_398c647ec4d640cc6b50da3f1e4510829bb1d7b3'
                 }
             }
         }
