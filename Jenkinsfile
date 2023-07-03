@@ -25,7 +25,7 @@ pipeline {
                 
                 // Run SonarQube analysis
                 withSonarQubeEnv('SonarQube Server') {
-                    sh 'mvn sonar:sonar'
+                    sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=maven-project -Dsonar.projectName="maven-project"'
                 }
             }
         }
