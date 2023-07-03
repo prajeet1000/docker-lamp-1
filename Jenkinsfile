@@ -1,19 +1,17 @@
 pipeline {
     agent any
     
-    stages {
-        stage('Build') {
-            steps {
-                // Checkout source code from your version control system
-                checkout scm
-                
-                // Set up Maven
-                withMaven(maven: 'Maven 3') {
-                    // Build the Maven project
-                    sh 'mvn clean install'
-                }
-            }
-        }
+   node {
+  stage('SCM') {
+    checkout scm
+  }
+  stage('SonarQube Analysis') {
+    def mvn = tool 'Default Maven';
+    withSonarQubeEnv() {
+      sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=maven-project -Dsonar.projectName='maven-project'"
+    }
+  }
+}
         
         stage('SonarQube Analysis') {
             steps {
